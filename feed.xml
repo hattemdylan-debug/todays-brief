@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Today's Brief</title>
+    <link>https://hattemdylan-debug.github.io/todays-brief</link>
+    <description>Business &amp; tech news. Tight and punchy. Every morning.</description>
+    <language>en-us</language>
+    <copyright>Dylan Hattem</copyright>
+    <lastBuildDate>Sun, 22 Feb 2026 06:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://hattemdylan-debug.github.io/todays-brief/podcast_cover.png</url>
+      <title>Today's Brief</title>
+      <link>https://hattemdylan-debug.github.io/todays-brief</link>
+    </image>
+    <itunes:author>Dylan Hattem</itunes:author>
+    <itunes:owner>
+      <itunes:name>Dylan Hattem</itunes:name>
+    </itunes:owner>
+    <itunes:image href="https://hattemdylan-debug.github.io/todays-brief/podcast_cover.png"/>
+    <itunes:category text="Business"/>
+    <itunes:category text="News"/>
+    <itunes:explicit>false</itunes:explicit>
+    <item>
+      <title>Today's Brief - February 22, 2026</title>
+      <description>OpenAI slashes its ambitious spending target from $1.4 trillion to $600 billion by 2030 while cybersecurity stocks crash 8-9% in a &quot;mini-flash crash&quot; after Anthropic unveils AI that can automatically patch code vulnerabilities. Plus, the Supreme Court strikes down global tariffs as AI continues reshaping entire industries from gaming to autonomous vehicles.</description>
+      <pubDate>Sun, 22 Feb 2026 06:00:00 +0000</pubDate>
+      <enclosure url="https://todaysbrief-podcast.s3.us-east-1.amazonaws.com/podcast-2026-02-22.mp3" type="audio/mpeg" length="0"/>
+      <guid isPermaLink="false">https://todaysbrief-podcast.s3.us-east-1.amazonaws.com/podcast-2026-02-22.mp3</guid>
+      <itunes:summary>OpenAI slashes its ambitious spending target from $1.4 trillion to $600 billion by 2030 while cybersecurity stocks crash 8-9% in a &quot;mini-flash crash&quot; after Anthropic unveils AI that can automatically patch code vulnerabilities. Plus, the Supreme Court strikes down global tariffs as AI continues reshaping entire industries from gaming to autonomous vehicles.</itunes:summary>
+      <itunes:duration>00:05:00</itunes:duration>
+    </item>
+  </channel>
+</rss>
