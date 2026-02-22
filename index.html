@@ -16,102 +16,245 @@
     }
 
     .container {
-      max-width: 760px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 48px 24px 80px;
+      padding: 48px 20px 80px;
     }
 
     /* ── Header ── */
     header {
       display: flex;
       align-items: center;
-      gap: 28px;
-      margin-bottom: 48px;
+      gap: 24px;
+      margin-bottom: 32px;
     }
     header img {
-      width: 110px;
-      height: 110px;
-      border-radius: 16px;
+      width: 100px;
+      height: 100px;
+      border-radius: 18px;
       flex-shrink: 0;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45);
     }
     header .info h1 {
       font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      font-weight: 800;
+      letter-spacing: -0.03em;
       line-height: 1.1;
     }
-    header .info p {
-      margin-top: 6px;
+    header .info .tagline {
+      margin-top: 5px;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      font-weight: 400;
+    }
+
+    /* ── About ── */
+    .about {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 24px;
       font-size: 0.95rem;
-      opacity: 0.65;
+      line-height: 1.6;
+      opacity: 0.85;
+    }
+
+    /* ── Subscribe ── */
+    .subscribe {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .subscribe-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.18);
+      transition: background 0.15s, border-color 0.15s;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .subscribe-btn svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .btn-apple {
+      background: rgba(147,51,234,0.25);
+      color: #e2b8ff;
+      border-color: rgba(147,51,234,0.4);
+    }
+    .btn-apple:hover { background: rgba(147,51,234,0.4); }
+    .btn-spotify {
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.4);
+      border-color: rgba(255,255,255,0.1);
+      cursor: default;
+    }
+    .btn-rss {
+      background: rgba(249,115,22,0.2);
+      color: #fdba74;
+      border-color: rgba(249,115,22,0.35);
+    }
+    .btn-rss:hover { background: rgba(249,115,22,0.35); }
+    .coming-soon {
+      font-size: 0.7rem;
+      font-weight: 500;
+      opacity: 0.6;
+      margin-left: 2px;
     }
 
     /* ── Search ── */
-    .search-wrap { margin-bottom: 36px; }
+    .search-wrap { margin-bottom: 24px; }
     #search {
       width: 100%;
-      padding: 14px 18px;
+      padding: 13px 18px;
       border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.07);
       color: #fff;
-      font-size: 1rem;
+      font-size: 0.95rem;
       outline: none;
       transition: border-color 0.2s, background 0.2s;
     }
-    #search::placeholder { color: rgba(255,255,255,0.4); }
+    #search::placeholder { color: rgba(255,255,255,0.35); }
     #search:focus {
-      border-color: rgba(255,255,255,0.4);
-      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.11);
     }
 
     /* ── Episode list ── */
-    #episodes { display: flex; flex-direction: column; gap: 12px; }
+    #episodes { display: flex; flex-direction: column; gap: 14px; }
 
     .episode {
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 14px;
-      padding: 24px 26px;
+      border-radius: 16px;
+      padding: 22px 22px 18px;
       transition: background 0.15s;
     }
-    .episode:hover { background: rgba(255,255,255,0.11); }
+    .episode:hover { background: rgba(255,255,255,0.10); }
 
+    .episode-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
     .episode-date {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #c084fc;
+    }
+    .episode-duration {
       font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0.5;
-      margin-bottom: 6px;
+      color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.08);
+      padding: 3px 9px;
+      border-radius: 20px;
     }
     .episode-title {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
       letter-spacing: -0.01em;
       line-height: 1.3;
       margin-bottom: 8px;
     }
     .episode-description {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       line-height: 1.6;
-      opacity: 0.75;
+      opacity: 0.7;
       margin-bottom: 16px;
     }
 
-    audio {
-      width: 100%;
+    /* ── Custom Audio Player ── */
+    .player {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+    .play-btn {
+      width: 36px;
       height: 36px;
-      border-radius: 8px;
-      accent-color: #a855f7;
+      border-radius: 50%;
+      border: none;
+      background: #a855f7;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .play-btn:hover { background: #9333ea; transform: scale(1.05); }
+    .play-btn:active { transform: scale(0.97); }
+    .play-btn svg { width: 14px; height: 14px; }
+
+    .player-track {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 0;
+    }
+    .player-progress {
+      width: 100%;
+      height: 4px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(255,255,255,0.15);
+      border-radius: 2px;
+      cursor: pointer;
+      outline: none;
+    }
+    .player-progress::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #a855f7;
+      cursor: pointer;
+      margin-top: -4px;
+    }
+    .player-progress::-webkit-slider-runnable-track {
+      height: 4px;
+      border-radius: 2px;
+    }
+    .player-progress::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #a855f7;
+      border: none;
+      cursor: pointer;
+    }
+    .player-times {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      opacity: 0.45;
+      font-variant-numeric: tabular-nums;
     }
 
     /* ── States ── */
     .state-msg {
       text-align: center;
       padding: 60px 24px;
-      opacity: 0.5;
+      opacity: 0.45;
       font-size: 0.95rem;
       line-height: 1.7;
     }
@@ -120,15 +263,22 @@
       margin-top: 64px;
       text-align: center;
       font-size: 0.75rem;
-      opacity: 0.3;
+      opacity: 0.25;
     }
 
     /* ── Mobile ── */
     @media (max-width: 540px) {
-      header { flex-direction: column; align-items: flex-start; gap: 16px; }
-      header img { width: 80px; height: 80px; border-radius: 12px; }
+      .container { padding: 28px 16px 60px; }
+      header { gap: 16px; margin-bottom: 24px; }
+      header img { width: 72px; height: 72px; border-radius: 14px; }
       header .info h1 { font-size: 1.6rem; }
-      .episode { padding: 18px; }
+      .about { font-size: 0.9rem; padding: 16px 18px; }
+      .subscribe { gap: 8px; }
+      .subscribe-btn { padding: 9px 13px; font-size: 0.8rem; }
+      .episode { padding: 16px 16px 14px; }
+      .episode-title { font-size: 1rem; }
+      .player { gap: 10px; padding: 9px 12px; }
+      .play-btn { width: 32px; height: 32px; }
     }
   </style>
 </head>
@@ -139,9 +289,37 @@
       <img src="podcast_cover.png" alt="Today's Brief cover art" />
       <div class="info">
         <h1>Today's Brief</h1>
-        <p>Business &amp; tech news, tight and punchy — every morning.</p>
+        <p class="tagline">Business &amp; tech news &mdash; every morning</p>
       </div>
     </header>
+
+    <div class="about">
+      Daily business and tech news. We break down the biggest stories in 5 minutes so you can start your day informed.
+    </div>
+
+    <div class="subscribe">
+      <a class="subscribe-btn btn-apple" href="https://hattemdylan-debug.github.io/todays-brief/feed.xml" target="_blank" rel="noopener">
+        <!-- Apple Podcasts icon -->
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a3 3 0 110 6 3 3 0 010-6zm0 14.5c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"/>
+        </svg>
+        Apple Podcasts
+      </a>
+      <span class="subscribe-btn btn-spotify">
+        <!-- Spotify icon -->
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 01-.277-1.215c3.809-.87 7.077-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 01-.973-.519.781.781 0 01.52-.973c3.632-1.102 8.147-.568 11.234 1.329a.78.78 0 01.256 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 11-.543-1.793c3.563-1.08 9.484-.871 13.22 1.37a.937.937 0 01-.06 1.58z"/>
+        </svg>
+        Spotify <span class="coming-soon">(coming soon)</span>
+      </span>
+      <a class="subscribe-btn btn-rss" href="feed.xml" target="_blank" rel="noopener">
+        <!-- RSS icon -->
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6.18 15.64a2.18 2.18 0 010 4.36 2.18 2.18 0 010-4.36M4 4.44A15.56 15.56 0 0119.56 20h-2.83A12.73 12.73 0 006.18 7.27V4.44m0 5.66a9.9 9.9 0 019.9 9.9h-2.83A7.07 7.07 0 006.18 12.93V10.1z"/>
+        </svg>
+        RSS Feed
+      </a>
+    </div>
 
     <div class="search-wrap">
       <input
@@ -162,15 +340,110 @@
   </div>
 
   <script>
-    const container  = document.getElementById('episodes');
+    const container   = document.getElementById('episodes');
     const searchInput = document.getElementById('search');
-    let allEpisodes  = [];
+    let allEpisodes   = [];
+    let activeAudio   = null;
+    let activePlayBtn = null;
 
     function formatDate(iso) {
       const [y, m, d] = iso.split('-').map(Number);
       return new Date(y, m - 1, d).toLocaleDateString('en-US', {
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+        weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
       });
+    }
+
+    function fmtTime(s) {
+      if (!isFinite(s)) return '0:00';
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return `${m}:${sec.toString().padStart(2, '0')}`;
+    }
+
+    // Icons
+    const PLAY_ICON  = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
+    const PAUSE_ICON = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+
+    function makePlayer(url) {
+      const audio    = new Audio();
+      audio.preload  = 'none';
+      audio.src      = url;
+
+      const wrapper  = document.createElement('div');
+      wrapper.className = 'player';
+      wrapper.innerHTML = `
+        <button class="play-btn" aria-label="Play">${PLAY_ICON}</button>
+        <div class="player-track">
+          <input type="range" class="player-progress" min="0" max="100" value="0" step="0.1" aria-label="Seek">
+          <div class="player-times">
+            <span class="current-time">0:00</span>
+            <span class="total-time">--:--</span>
+          </div>
+        </div>
+      `;
+
+      const playBtn   = wrapper.querySelector('.play-btn');
+      const progress  = wrapper.querySelector('.player-progress');
+      const curTime   = wrapper.querySelector('.current-time');
+      const totTime   = wrapper.querySelector('.total-time');
+
+      // Update progress bar fill via CSS custom property
+      function updateFill() {
+        const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+        progress.style.background =
+          `linear-gradient(to right, #a855f7 ${pct}%, rgba(255,255,255,0.15) ${pct}%)`;
+        progress.value = pct;
+      }
+
+      audio.addEventListener('loadedmetadata', () => {
+        totTime.textContent = fmtTime(audio.duration);
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        curTime.textContent = fmtTime(audio.currentTime);
+        updateFill();
+      });
+
+      audio.addEventListener('ended', () => {
+        playBtn.innerHTML = PLAY_ICON;
+        playBtn.setAttribute('aria-label', 'Play');
+        activeAudio   = null;
+        activePlayBtn = null;
+        audio.currentTime = 0;
+        updateFill();
+      });
+
+      playBtn.addEventListener('click', () => {
+        // Pause any other playing episode
+        if (activeAudio && activeAudio !== audio) {
+          activeAudio.pause();
+          activePlayBtn.innerHTML = PLAY_ICON;
+          activePlayBtn.setAttribute('aria-label', 'Play');
+        }
+
+        if (audio.paused) {
+          audio.play();
+          playBtn.innerHTML = PAUSE_ICON;
+          playBtn.setAttribute('aria-label', 'Pause');
+          activeAudio   = audio;
+          activePlayBtn = playBtn;
+        } else {
+          audio.pause();
+          playBtn.innerHTML = PLAY_ICON;
+          playBtn.setAttribute('aria-label', 'Play');
+          activeAudio   = null;
+          activePlayBtn = null;
+        }
+      });
+
+      progress.addEventListener('input', () => {
+        if (audio.duration) {
+          audio.currentTime = (progress.value / 100) * audio.duration;
+          updateFill();
+        }
+      });
+
+      return wrapper;
     }
 
     function renderEpisode(ep) {
@@ -178,12 +451,26 @@
       article.className = 'episode';
       article.dataset.search = (ep.title + ' ' + ep.description + ' ' + ep.date).toLowerCase();
 
-      article.innerHTML = `
-        <div class="episode-date">${formatDate(ep.date)}</div>
-        <div class="episode-title">${ep.title}</div>
-        <div class="episode-description">${ep.description}</div>
-        <audio controls preload="none" src="${ep.audio_url}"></audio>
+      const meta = document.createElement('div');
+      meta.className = 'episode-meta';
+      meta.innerHTML = `
+        <span class="episode-date">${formatDate(ep.date)}</span>
+        <span class="episode-duration">5 min</span>
       `;
+
+      const title = document.createElement('div');
+      title.className = 'episode-title';
+      title.textContent = ep.title;
+
+      const desc = document.createElement('div');
+      desc.className = 'episode-description';
+      desc.textContent = ep.description;
+
+      article.appendChild(meta);
+      article.appendChild(title);
+      article.appendChild(desc);
+      article.appendChild(makePlayer(ep.audio_url));
+
       return article;
     }
 
@@ -217,7 +504,7 @@
       } catch (err) {
         container.innerHTML = `<div class="state-msg">
           Could not load episodes.json.<br>
-          Serve this folder from a local or hosted server — not opened as a file.
+          Serve this folder from a local or hosted server.
         </div>`;
         return;
       }
