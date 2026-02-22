@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Today's Brief</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Today's Brief" />
+  <meta property="og:description" content="Daily business and tech news. We break down the biggest stories in 5 minutes so you can start your day informed." />
+  <meta property="og:image" content="https://hattemdylan-debug.github.io/todays-brief/podcast_cover.png" />
+  <meta property="og:url" content="https://hattemdylan-debug.github.io/todays-brief/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Today's Brief" />
+  <meta name="twitter:description" content="Daily business and tech news. We break down the biggest stories in 5 minutes so you can start your day informed." />
+  <meta name="twitter:image" content="https://hattemdylan-debug.github.io/todays-brief/podcast_cover.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #080e1a;
+      --bg-card:    #0f1825;
+      --bg-card-hover: #141f30;
+      --border:     rgba(255,255,255,0.07);
+      --border-mid: rgba(255,255,255,0.12);
+      --text:       #f0f4ff;
+      --text-muted: rgba(240,244,255,0.45);
+      --text-dim:   rgba(240,244,255,0.25);
+      --accent-1:   #4f6ef7;
+      --accent-2:   #9b45e8;
+      --grad:       linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Ambient glow ── */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(79,110,247,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,14,26,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 7px;
+      border: 1px solid transparent;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .nav-link:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+      border-color: var(--border);
+    }
+    .nav-link.primary {
+      background: var(--grad);
+      color: #fff;
+      border-color: transparent;
+      font-weight: 600;
+    }
+    .nav-link.primary:hover { opacity: 0.88; }
+
+    /* ── Layout ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 28px 100px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 72px 0 56px;
+      display: flex;
+      gap: 36px;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 56px;
+    }
+    .hero-art {
+      width: 120px;
+      height: 120px;
+      border-radius: 20px;
+      flex-shrink: 0;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+    }
+    .hero-body { flex: 1; min-width: 0; }
+    .hero-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-1);
+      margin-bottom: 10px;
+    }
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .hero-desc {
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 28px;
+    }
+    .hero-subscribe {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .sub-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.1s;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .sub-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .sub-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .sub-btn:active { transform: translateY(0); }
+    .sub-apple {
+      background: var(--grad);
+      color: #fff;
+    }
+    .sub-rss {
+      background: rgba(255,255,255,0.06);
+      border-color: var(--border-mid);
+      color: var(--text-muted);
+    }
+    .sub-rss:hover { color: var(--text); background: rgba(255,255,255,0.09); }
+    .sub-spotify {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text-dim);
+      cursor: default;
+      pointer-events: none;
+    }
+    .sub-soon {
+      font-size: 0.68rem;
+      font-weight: 500;
+      opacity: 0.6;
+    }
+
+    /* ── Section header ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .section-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* ── Search ── */
+    .search-wrap { margin-bottom: 32px; }
+    #search {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border-mid);
+      background: var(--bg-card);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    #search::placeholder { color: var(--text-dim); }
+    #search:focus {
+      border-color: rgba(79,110,247,0.5);
+      background: var(--bg-card-hover);
+    }
+
+    /* ── Episode list ── */
+    #episodes { display: flex; flex-direction: column; gap: 2px; }
+
+    .episode {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 30px;
+      transition: background 0.15s, border-color 0.15s;
+      margin-bottom: 10px;
+    }
+    .episode:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-mid);
+    }
+
+    .ep-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+    .ep-date {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-1);
+    }
+    .ep-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+    .ep-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    .ep-desc {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    /* ── Player ── */
+    .player {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .play-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: var(--grad);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(79,110,247,0.35);
+      transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
+    }
+    .play-btn:hover {
+      opacity: 0.9;
+      transform: scale(1.06);
+      box-shadow: 0 6px 20px rgba(79,110,247,0.5);
+    }
+    .play-btn:active { transform: scale(0.97); }
+    .play-btn svg { width: 15px; height: 15px; }
+
+    .player-track { flex: 1; min-width: 0; }
+    .player-progress {
+      width: 100%;
+      height: 3px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      cursor: pointer;
+      outline: none;
+      display: block;
+      margin-bottom: 7px;
+    }
+    .player-progress::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 0 3px rgba(79,110,247,0.4);
+      margin-top: -5px;
+    }
+    .player-progress::-moz-range-thumb {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #fff;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 0 3px rgba(79,110,247,0.4);
+    }
+    .player-times {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ── States ── */
+    .state-msg {
+      text-align: center;
+      padding: 80px 24px;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 80px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer p {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+    footer a {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--text-muted); }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      .nav-inner { padding: 0 18px; }
+      .page { padding: 0 18px 80px; }
+      .hero { padding: 48px 0 40px; gap: 20px; flex-direction: column; margin-bottom: 40px; }
+      .hero-art { width: 80px; height: 80px; border-radius: 16px; }
+      .hero-title { font-size: 2rem; }
+      .hero-desc { font-size: 0.9rem; }
+      .episode { padding: 20px 18px; }
+      .ep-title { font-size: 1.05rem; }
+      .nav-links .nav-link:not(.primary) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="#">
+        <img src="podcast_cover.png" alt="" />
+        Today's Brief
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="feed.xml" target="_blank" rel="noopener">RSS</a>
+        <a class="nav-link primary" href="https://hattemdylan-debug.github.io/todays-brief/feed.xml" target="_blank" rel="noopener">Subscribe</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- Hero -->
+    <section class="hero">
+      <img class="hero-art" src="podcast_cover.png" alt="Today's Brief" />
+      <div class="hero-body">
+        <div class="hero-label">Daily Podcast</div>
+        <h1 class="hero-title">Today's Brief</h1>
+        <p class="hero-desc">Daily business and tech news. We break down the biggest stories in 5 minutes so you can start your day informed.</p>
+        <div class="hero-subscribe">
+          <a class="sub-btn sub-apple" href="https://hattemdylan-debug.github.io/todays-brief/feed.xml" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a3 3 0 110 6 3 3 0 010-6zm0 14.5c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+            Apple Podcasts
+          </a>
+          <a class="sub-btn sub-rss" href="feed.xml" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.18 15.64a2.18 2.18 0 010 4.36 2.18 2.18 0 010-4.36M4 4.44A15.56 15.56 0 0119.56 20h-2.83A12.73 12.73 0 006.18 7.27V4.44m0 5.66a9.9 9.9 0 019.9 9.9h-2.83A7.07 7.07 0 006.18 12.93V10.1z"/></svg>
+            RSS Feed
+          </a>
+          <span class="sub-btn sub-spotify">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 01-.277-1.215c3.809-.87 7.077-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 01-.973-.519.781.781 0 01.52-.973c3.632-1.102 8.147-.568 11.234 1.329a.78.78 0 01.256 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 11-.543-1.793c3.563-1.08 9.484-.871 13.22 1.37a.937.937 0 01-.06 1.58z"/></svg>
+            Spotify <span class="sub-soon">(coming soon)</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Episodes -->
+    <div class="section-header">
+      <span class="section-title">All Episodes</span>
+    </div>
+
+    <div class="search-wrap">
+      <input type="search" id="search" placeholder="Search episodes…" autocomplete="off" spellcheck="false" />
+    </div>
+
+    <div id="episodes">
+      <div class="state-msg">Loading episodes…</div>
+    </div>
+
+    <footer>
+      <p>Today's Brief &mdash; generated daily</p>
+      <a href="feed.xml" target="_blank" rel="noopener">RSS Feed</a>
+    </footer>
+
+  </div>
+
+  <script>
+    const container   = document.getElementById('episodes');
+    const searchInput = document.getElementById('search');
+    let allEpisodes   = [];
+    let activeAudio   = null;
+    let activeBtn     = null;
+
+    const PLAY  = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
+    const PAUSE = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+
+    function formatDate(iso) {
+      const [y, m, d] = iso.split('-').map(Number);
+      return new Date(y, m - 1, d).toLocaleDateString('en-US', {
+        weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
+      });
+    }
+
+    function fmtTime(s) {
+      if (!isFinite(s)) return '0:00';
+      const m = Math.floor(s / 60);
+      return `${m}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+    }
+
+    function makePlayer(url) {
+      const audio = new Audio();
+      audio.preload = 'none';
+      audio.src = url;
+
+      const wrap = document.createElement('div');
+      wrap.className = 'player';
+      wrap.innerHTML = `
+        <button class="play-btn" aria-label="Play">${PLAY}</button>
+        <div class="player-track">
+          <input type="range" class="player-progress" min="0" max="100" value="0" step="0.1" aria-label="Seek" />
+          <div class="player-times">
+            <span class="t-cur">0:00</span>
+            <span class="t-tot">—</span>
+          </div>
+        </div>
+      `;
+
+      const btn  = wrap.querySelector('.play-btn');
+      const prog = wrap.querySelector('.player-progress');
+      const tCur = wrap.querySelector('.t-cur');
+      const tTot = wrap.querySelector('.t-tot');
+
+      function setFill(pct) {
+        prog.style.background =
+          `linear-gradient(to right, #4f6ef7 ${pct}%, rgba(255,255,255,0.08) ${pct}%)`;
+      }
+
+      audio.addEventListener('loadedmetadata', () => { tTot.textContent = fmtTime(audio.duration); });
+      audio.addEventListener('timeupdate', () => {
+        const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+        prog.value = pct;
+        tCur.textContent = fmtTime(audio.currentTime);
+        setFill(pct);
+      });
+      audio.addEventListener('ended', () => {
+        btn.innerHTML = PLAY;
+        btn.setAttribute('aria-label', 'Play');
+        activeAudio = activeBtn = null;
+        audio.currentTime = 0;
+        setFill(0);
+      });
+
+      btn.addEventListener('click', () => {
+        if (activeAudio && activeAudio !== audio) {
+          activeAudio.pause();
+          activeBtn.innerHTML = PLAY;
+          activeBtn.setAttribute('aria-label', 'Play');
+        }
+        if (audio.paused) {
+          audio.play();
+          btn.innerHTML = PAUSE;
+          btn.setAttribute('aria-label', 'Pause');
+          activeAudio = audio; activeBtn = btn;
+        } else {
+          audio.pause();
+          btn.innerHTML = PLAY;
+          btn.setAttribute('aria-label', 'Play');
+          activeAudio = activeBtn = null;
+        }
+      });
+
+      prog.addEventListener('input', () => {
+        if (audio.duration) {
+          audio.currentTime = (prog.value / 100) * audio.duration;
+          setFill(prog.value);
+        }
+      });
+
+      return wrap;
+    }
+
+    function renderEpisode(ep, index) {
+      const el = document.createElement('article');
+      el.className = 'episode';
+      el.dataset.search = (ep.title + ' ' + ep.description + ' ' + ep.date).toLowerCase();
+
+      const top = document.createElement('div');
+      top.className = 'ep-top';
+      top.innerHTML = `<span class="ep-date">${formatDate(ep.date)}</span><span class="ep-badge">5 min</span>`;
+
+      const title = document.createElement('h2');
+      title.className = 'ep-title';
+      title.textContent = ep.title;
+
+      const desc = document.createElement('p');
+      desc.className = 'ep-desc';
+      desc.textContent = ep.description;
+
+      el.appendChild(top);
+      el.appendChild(title);
+      el.appendChild(desc);
+      el.appendChild(makePlayer(ep.audio_url));
+      return el;
+    }
+
+    function applyFilter(q) {
+      q = q.trim().toLowerCase();
+      let n = 0;
+      container.querySelectorAll('.episode').forEach(el => {
+        const show = !q || el.dataset.search.includes(q);
+        el.style.display = show ? '' : 'none';
+        if (show) n++;
+      });
+      let nr = container.querySelector('.no-results');
+      if (!n && allEpisodes.length) {
+        if (!nr) { nr = document.createElement('div'); nr.className = 'state-msg no-results'; container.appendChild(nr); }
+        nr.textContent = `No episodes match "${searchInput.value}".`;
+      } else if (nr) nr.remove();
+    }
+
+    async function load() {
+      try {
+        const r = await fetch('./episodes.json?' + Date.now());
+        if (!r.ok) throw new Error();
+        allEpisodes = await r.json();
+      } catch {
+        container.innerHTML = '<div class="state-msg">Could not load episodes. Serve from a web server.</div>';
+        return;
+      }
+      container.innerHTML = '';
+      if (!allEpisodes.length) { container.innerHTML = '<div class="state-msg">No episodes yet.</div>'; return; }
+      allEpisodes.forEach((ep, i) => container.appendChild(renderEpisode(ep, i)));
+    }
+
+    searchInput.addEventListener('input', () => applyFilter(searchInput.value));
+    load();
+  </script>
+</body>
+</html>
