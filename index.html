@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Today's Brief</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: linear-gradient(160deg, #0A1E5A 0%, #7814B4 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-bottom: 48px;
+    }
+    header img {
+      width: 110px;
+      height: 110px;
+      border-radius: 16px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    header .info h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    header .info p {
+      margin-top: 6px;
+      font-size: 0.95rem;
+      opacity: 0.65;
+    }
+
+    /* ── Search ── */
+    .search-wrap { margin-bottom: 36px; }
+    #search {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    #search::placeholder { color: rgba(255,255,255,0.4); }
+    #search:focus {
+      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* ── Episode list ── */
+    #episodes { display: flex; flex-direction: column; gap: 12px; }
+
+    .episode {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 24px 26px;
+      transition: background 0.15s;
+    }
+    .episode:hover { background: rgba(255,255,255,0.11); }
+
+    .episode-date {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 6px;
+    }
+    .episode-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .episode-description {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      opacity: 0.75;
+      margin-bottom: 16px;
+    }
+
+    audio {
+      width: 100%;
+      height: 36px;
+      border-radius: 8px;
+      accent-color: #a855f7;
+    }
+
+    /* ── States ── */
+    .state-msg {
+      text-align: center;
+      padding: 60px 24px;
+      opacity: 0.5;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    footer {
+      margin-top: 64px;
+      text-align: center;
+      font-size: 0.75rem;
+      opacity: 0.3;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 540px) {
+      header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      header img { width: 80px; height: 80px; border-radius: 12px; }
+      header .info h1 { font-size: 1.6rem; }
+      .episode { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <img src="podcast_cover.png" alt="Today's Brief cover art" />
+      <div class="info">
+        <h1>Today's Brief</h1>
+        <p>Business &amp; tech news, tight and punchy — every morning.</p>
+      </div>
+    </header>
+
+    <div class="search-wrap">
+      <input
+        type="search"
+        id="search"
+        placeholder="Search episodes…"
+        autocomplete="off"
+        spellcheck="false"
+      />
+    </div>
+
+    <div id="episodes">
+      <div class="state-msg">Loading episodes…</div>
+    </div>
+
+    <footer>Today's Brief &mdash; generated daily</footer>
+
+  </div>
+
+  <script>
+    const container  = document.getElementById('episodes');
+    const searchInput = document.getElementById('search');
+    let allEpisodes  = [];
+
+    function formatDate(iso) {
+      const [y, m, d] = iso.split('-').map(Number);
+      return new Date(y, m - 1, d).toLocaleDateString('en-US', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+      });
+    }
+
+    function renderEpisode(ep) {
+      const article = document.createElement('article');
+      article.className = 'episode';
+      article.dataset.search = (ep.title + ' ' + ep.description + ' ' + ep.date).toLowerCase();
+
+      article.innerHTML = `
+        <div class="episode-date">${formatDate(ep.date)}</div>
+        <div class="episode-title">${ep.title}</div>
+        <div class="episode-description">${ep.description}</div>
+        <audio controls preload="none" src="${ep.audio_url}"></audio>
+      `;
+      return article;
+    }
+
+    function applyFilter(query) {
+      const q = query.trim().toLowerCase();
+      let shown = 0;
+      container.querySelectorAll('.episode').forEach(el => {
+        const match = !q || el.dataset.search.includes(q);
+        el.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+
+      let noResults = container.querySelector('.no-results');
+      if (!shown && allEpisodes.length) {
+        if (!noResults) {
+          noResults = document.createElement('div');
+          noResults.className = 'state-msg no-results';
+          container.appendChild(noResults);
+        }
+        noResults.textContent = `No episodes match "${query}".`;
+      } else if (noResults) {
+        noResults.remove();
+      }
+    }
+
+    async function loadEpisodes() {
+      try {
+        const res = await fetch('./episodes.json?' + Date.now());
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        allEpisodes = await res.json();
+      } catch (err) {
+        container.innerHTML = `<div class="state-msg">
+          Could not load episodes.json.<br>
+          Serve this folder from a local or hosted server — not opened as a file.
+        </div>`;
+        return;
+      }
+
+      container.innerHTML = '';
+
+      if (!allEpisodes.length) {
+        container.innerHTML = '<div class="state-msg">No episodes yet.</div>';
+        return;
+      }
+
+      allEpisodes.forEach(ep => container.appendChild(renderEpisode(ep)));
+    }
+
+    searchInput.addEventListener('input', () => applyFilter(searchInput.value));
+    loadEpisodes();
+  </script>
+</body>
+</html>
