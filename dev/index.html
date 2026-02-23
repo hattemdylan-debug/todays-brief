@@ -24,17 +24,19 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:         #080e1a;
-      --bg-card:    #0f1825;
+      --bg:            #080e1a;
+      --bg-card:       #0f1825;
       --bg-card-hover: #141f30;
-      --border:     rgba(255,255,255,0.07);
-      --border-mid: rgba(255,255,255,0.12);
-      --text:       #f0f4ff;
-      --text-muted: rgba(240,244,255,0.45);
-      --text-dim:   rgba(240,244,255,0.25);
-      --accent-1:   #4f6ef7;
-      --accent-2:   #9b45e8;
-      --grad:       linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      --border:        rgba(255,255,255,0.07);
+      --border-mid:    rgba(255,255,255,0.12);
+      --text:          #f0f4ff;
+      --text-muted:    rgba(240,244,255,0.45);
+      --text-dim:      rgba(240,244,255,0.25);
+      --accent-1:      #4f6ef7;
+      --accent-2:      #9b45e8;
+      --grad:          linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      --nav-h:         60px;
+      --sidebar-w:     210px;
     }
 
     html { scroll-behavior: smooth; }
@@ -57,7 +59,7 @@
       transform: translateX(-50%);
       width: 900px;
       height: 500px;
-      background: radial-gradient(ellipse, rgba(79,110,247,0.12) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(79,110,247,0.1) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -67,16 +69,16 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(8,14,26,0.85);
+      background: rgba(8,14,26,0.88);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
-      max-width: 860px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 0 28px;
-      height: 60px;
+      height: var(--nav-h);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -91,16 +93,8 @@
       align-items: center;
       gap: 10px;
     }
-    .nav-logo img {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 6px; }
+    .nav-links { display: flex; align-items: center; gap: 6px; }
     .nav-link {
       font-size: 0.8rem;
       font-weight: 500;
@@ -112,79 +106,68 @@
       transition: color 0.15s, border-color 0.15s, background 0.15s;
       white-space: nowrap;
     }
-    .nav-link:hover {
-      color: var(--text);
-      background: rgba(255,255,255,0.05);
-      border-color: var(--border);
-    }
-    .nav-link.primary {
-      background: var(--grad);
-      color: #fff;
-      border-color: transparent;
-      font-weight: 600;
-    }
+    .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.05); border-color: var(--border); }
+    .nav-link.primary { background: var(--grad); color: #fff; border-color: transparent; font-weight: 600; }
     .nav-link.primary:hover { opacity: 0.88; }
 
-    /* ── Layout ── */
-    .page {
+    /* ── Page layout: two-column ── */
+    .page-outer {
       position: relative;
       z-index: 1;
-      max-width: 860px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 0 28px 100px;
     }
+    .page-layout {
+      display: flex;
+      gap: 36px;
+      align-items: flex-start;
+    }
+    .main-content {
+      flex: 1;
+      min-width: 0;
+    }
 
     /* ── Hero ── */
-    .hero-wrapper {
-      display: flex;
-      gap: 40px;
-      align-items: flex-start;
-      padding: 72px 0 56px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 56px;
-    }
     .hero {
       display: flex;
       gap: 24px;
       align-items: flex-start;
-      flex: 1;
-      min-width: 0;
+      padding: 64px 0 48px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
     }
     .hero-art {
-      width: 100px;
-      height: 100px;
+      width: 96px;
+      height: 96px;
       border-radius: 18px;
       flex-shrink: 0;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
     }
     .hero-body { flex: 1; min-width: 0; }
     .hero-label {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--accent-1);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .hero-title {
-      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
       font-weight: 900;
       letter-spacing: -0.04em;
       line-height: 1;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .hero-desc {
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.65;
       color: var(--text-muted);
-      max-width: 480px;
-      margin-bottom: 28px;
+      max-width: 460px;
+      margin-bottom: 24px;
     }
-    .hero-subscribe {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .hero-subscribe { display: flex; flex-wrap: wrap; gap: 8px; }
     .sub-btn {
       display: inline-flex;
       align-items: center;
@@ -202,49 +185,21 @@
     .sub-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
     .sub-btn:hover { opacity: 0.85; transform: translateY(-1px); }
     .sub-btn:active { transform: translateY(0); }
-    .sub-apple {
-      background: var(--grad);
-      color: #fff;
-    }
-    .sub-rss {
-      background: rgba(255,255,255,0.06);
-      border-color: var(--border-mid);
-      color: var(--text-muted);
-    }
+    .sub-apple  { background: var(--grad); color: #fff; }
+    .sub-rss    { background: rgba(255,255,255,0.06); border-color: var(--border-mid); color: var(--text-muted); }
     .sub-rss:hover { color: var(--text); background: rgba(255,255,255,0.09); }
-    .sub-spotify {
-      background: transparent;
-      border-color: var(--border);
-      color: var(--text-dim);
-      cursor: default;
-      pointer-events: none;
-    }
-    .sub-soon {
-      font-size: 0.68rem;
-      font-weight: 500;
-      opacity: 0.6;
-    }
+    .sub-spotify { background: transparent; border-color: var(--border); color: var(--text-dim); cursor: default; pointer-events: none; }
+    .sub-soon   { font-size: 0.68rem; font-weight: 500; opacity: 0.6; }
 
     /* ── Section header ── */
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 24px;
-    }
-    .section-title {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .section-title  { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
 
     /* ── Search ── */
-    .search-wrap { margin-bottom: 32px; }
+    .search-wrap { margin-bottom: 28px; }
     #search {
       width: 100%;
-      padding: 14px 18px;
+      padding: 13px 18px;
       border-radius: 10px;
       border: 1px solid var(--border-mid);
       background: var(--bg-card);
@@ -255,304 +210,126 @@
       transition: border-color 0.2s, background 0.2s;
     }
     #search::placeholder { color: var(--text-dim); }
-    #search:focus {
-      border-color: rgba(79,110,247,0.5);
-      background: var(--bg-card-hover);
-    }
+    #search:focus { border-color: rgba(79,110,247,0.5); background: var(--bg-card-hover); }
 
     /* ── Episode list ── */
     #episodes { display: flex; flex-direction: column; gap: 2px; }
-
     .episode {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 28px 30px;
+      padding: 24px 26px;
       transition: background 0.15s, border-color 0.15s;
       margin-bottom: 10px;
     }
-    .episode:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-mid);
-    }
-
-    .ep-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 10px;
-    }
-    .ep-date {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-1);
-    }
-    .ep-badge {
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--text-dim);
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      padding: 3px 10px;
-      border-radius: 20px;
-      flex-shrink: 0;
-    }
-    .ep-title {
-      font-size: 1.2rem;
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      line-height: 1.25;
-      margin-bottom: 10px;
-      color: var(--text);
-    }
-    .ep-desc {
-      font-size: 0.875rem;
-      line-height: 1.65;
-      color: var(--text-muted);
-      margin-bottom: 22px;
-    }
+    .episode:hover { background: var(--bg-card-hover); border-color: var(--border-mid); }
+    .ep-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
+    .ep-date { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-1); }
+    .ep-badge { font-size: 0.7rem; font-weight: 600; color: var(--text-dim); background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 3px 10px; border-radius: 20px; flex-shrink: 0; }
+    .ep-title { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.025em; line-height: 1.25; margin-bottom: 8px; color: var(--text); }
+    .ep-desc  { font-size: 0.875rem; line-height: 1.65; color: var(--text-muted); margin-bottom: 20px; }
 
     /* ── Player ── */
-    .player {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+    .player { display: flex; align-items: center; gap: 14px; }
     .play-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: none;
-      background: var(--grad);
-      color: #fff;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      width: 40px; height: 40px; border-radius: 50%; border: none;
+      background: var(--grad); color: #fff; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
       box-shadow: 0 4px 16px rgba(79,110,247,0.35);
       transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
     }
-    .play-btn:hover {
-      opacity: 0.9;
-      transform: scale(1.06);
-      box-shadow: 0 6px 20px rgba(79,110,247,0.5);
-    }
+    .play-btn:hover { opacity: 0.9; transform: scale(1.06); box-shadow: 0 6px 20px rgba(79,110,247,0.5); }
     .play-btn:active { transform: scale(0.97); }
     .play-btn svg { width: 15px; height: 15px; }
-
     .player-track { flex: 1; min-width: 0; }
     .player-progress {
-      width: 100%;
-      height: 3px;
-      -webkit-appearance: none;
-      appearance: none;
-      background: rgba(255,255,255,0.08);
-      border-radius: 2px;
-      cursor: pointer;
-      outline: none;
-      display: block;
-      margin-bottom: 7px;
+      width: 100%; height: 3px; -webkit-appearance: none; appearance: none;
+      background: rgba(255,255,255,0.08); border-radius: 2px;
+      cursor: pointer; outline: none; display: block; margin-bottom: 7px;
     }
     .player-progress::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      background: #fff;
-      cursor: pointer;
-      box-shadow: 0 0 0 3px rgba(79,110,247,0.4);
-      margin-top: -5px;
+      -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%;
+      background: #fff; cursor: pointer; box-shadow: 0 0 0 3px rgba(79,110,247,0.4); margin-top: -5px;
     }
     .player-progress::-moz-range-thumb {
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      background: #fff;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 0 0 3px rgba(79,110,247,0.4);
+      width: 13px; height: 13px; border-radius: 50%; background: #fff;
+      border: none; cursor: pointer; box-shadow: 0 0 0 3px rgba(79,110,247,0.4);
     }
-    .player-times {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.68rem;
-      font-weight: 500;
-      color: var(--text-dim);
-      font-variant-numeric: tabular-nums;
-    }
+    .player-times { display: flex; justify-content: space-between; font-size: 0.68rem; font-weight: 500; color: var(--text-dim); font-variant-numeric: tabular-nums; }
 
-    /* ── Sponsors ── */
+    /* ── Sponsors sidebar ── */
     .sponsors-sidebar {
-      width: 200px;
+      width: var(--sidebar-w);
       flex-shrink: 0;
-      padding-top: 4px;
+      position: sticky;
+      top: calc(var(--nav-h) + 24px);
     }
     .sponsors-label {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       font-weight: 700;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #fff;
-      margin-bottom: 12px;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 10px;
     }
-    .sponsors-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
+    .sponsor-boxes { display: flex; flex-direction: column; gap: 8px; }
     .sponsor-box {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
+      width: 100%;
       border-radius: 10px;
-      padding: 14px 10px;
+      padding: 20px 14px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: background 0.15s, border-color 0.15s;
-      min-height: 76px;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.15s, filter 0.15s;
     }
-    .sponsor-box:hover {
-      background: rgba(255,255,255,0.07);
-      border-color: var(--border-mid);
-    }
-    .sponsor-box svg { flex-shrink: 0; }
+    .sponsor-box:hover { border-color: rgba(255,255,255,0.12); filter: brightness(1.1); }
+    .sponsor-icon { display: flex; align-items: center; justify-content: center; }
     .sponsor-name {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-    }
-    .sponsor-box.s-anthropic { background: rgba(79,46,120,0.25); border-color: rgba(120,80,200,0.2); }
-    .sponsor-box.s-aws       { background: rgba(160,80,10,0.25);  border-color: rgba(220,120,20,0.2); }
-    .sponsor-box.s-eleven    { background: rgba(10,100,140,0.25); border-color: rgba(20,160,200,0.2); }
-    .sponsor-box.s-apple     { background: rgba(110,40,180,0.25); border-color: rgba(160,80,240,0.2); }
-
-    /* ── Ticker ── */
-    .ticker-section {
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-      overflow: hidden;
-      background: rgba(255,255,255,0.025);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 18px 0;
-      margin-bottom: 56px;
-    }
-    .ticker-label {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 2;
-      padding: 0 24px;
-      font-size: 0.6rem;
+      font-size: 0.58rem;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--text-dim);
-      background: linear-gradient(to right, var(--bg) 70%, transparent);
-      height: 100%;
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
-      padding-right: 40px;
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      line-height: 1.4;
     }
-    .ticker-fade-right {
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 80px;
-      background: linear-gradient(to right, transparent, var(--bg));
-      z-index: 2;
-    }
-    .ticker-track {
-      display: flex;
-      width: max-content;
-      animation: ticker-scroll 35s linear infinite;
-      padding-left: 110px;
-    }
-    .ticker-track:hover { animation-play-state: paused; }
-    @keyframes ticker-scroll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-    .ticker-set {
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
-    .ticker-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 0 28px;
-      color: rgba(255,255,255,0.35);
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-      border-right: 1px solid rgba(255,255,255,0.07);
-      transition: color 0.15s;
-    }
-    .ticker-item:hover { color: rgba(255,255,255,0.65); }
-    .ticker-item svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.7; }
+
+    /* Box backgrounds */
+    .s-anthropic { background: #160d2b; }
+    .s-eleven    { background: #051b26; }
+    .s-aws       { background: #180e04; }
+    .s-apple     { background: #110636; }
 
     /* ── States ── */
-    .state-msg {
-      text-align: center;
-      padding: 80px 24px;
-      color: var(--text-dim);
-      font-size: 0.9rem;
-      line-height: 1.7;
-    }
+    .state-msg { text-align: center; padding: 80px 24px; color: var(--text-dim); font-size: 0.9rem; line-height: 1.7; }
 
     /* ── Footer ── */
     footer {
-      margin-top: 80px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
+      margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
     }
-    footer p {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-    }
-    footer a {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      text-decoration: none;
-    }
+    footer p   { font-size: 0.75rem; color: var(--text-dim); }
+    footer a   { font-size: 0.75rem; color: var(--text-dim); text-decoration: none; }
     footer a:hover { color: var(--text-muted); }
 
     /* ── Mobile ── */
-    @media (max-width: 700px) {
-      .hero-wrapper { flex-direction: column; padding: 40px 0 40px; gap: 32px; }
-      .sponsors-sidebar { width: 100%; }
-      .sponsors-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    @media (max-width: 860px) {
+      .page-layout { flex-direction: column-reverse; }
+      .sponsors-sidebar { position: static; width: 100%; }
+      .sponsor-boxes { flex-direction: row; flex-wrap: wrap; }
+      .sponsor-box { flex: 1; min-width: calc(50% - 4px); padding: 16px 10px 12px; }
     }
     @media (max-width: 600px) {
       .nav-inner { padding: 0 18px; }
-      .page { padding: 0 18px 80px; }
-      .hero { gap: 16px; }
+      .page-outer { padding: 0 18px 80px; }
+      .hero { padding: 40px 0 36px; gap: 16px; margin-bottom: 36px; }
       .hero-art { width: 72px; height: 72px; border-radius: 14px; }
-      .hero-title { font-size: 1.8rem; }
-      .hero-desc { font-size: 0.9rem; }
-      .episode { padding: 20px 18px; }
-      .ep-title { font-size: 1.05rem; }
+      .hero-title { font-size: 1.75rem; }
+      .episode { padding: 18px 16px; }
+      .ep-title { font-size: 1rem; }
       .nav-links .nav-link:not(.primary) { display: none; }
     }
   </style>
@@ -573,182 +350,107 @@
     </div>
   </nav>
 
-  <div class="page">
+  <div class="page-outer">
+    <div class="page-layout">
 
-    <!-- Hero + Sponsors sidebar -->
-    <div class="hero-wrapper">
+      <!-- ── Main content ── -->
+      <div class="main-content">
 
-      <!-- Left: hero -->
-      <section class="hero">
-        <img class="hero-art" src="podcast_cover.png" alt="Today's Brief" />
-        <div class="hero-body">
-          <div class="hero-label">Daily Podcast</div>
-          <h1 class="hero-title">Today's Brief</h1>
-          <p class="hero-desc">Daily business and tech news. We break down the biggest stories in 5 minutes so you can start your day informed.</p>
-          <div class="hero-subscribe">
-            <a class="sub-btn sub-apple" href="https://hattemdylan-debug.github.io/todays-brief/feed.xml" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a3 3 0 110 6 3 3 0 010-6zm0 14.5c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-              Apple Podcasts
-            </a>
-            <a class="sub-btn sub-rss" href="feed.xml" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.18 15.64a2.18 2.18 0 010 4.36 2.18 2.18 0 010-4.36M4 4.44A15.56 15.56 0 0119.56 20h-2.83A12.73 12.73 0 006.18 7.27V4.44m0 5.66a9.9 9.9 0 019.9 9.9h-2.83A7.07 7.07 0 006.18 12.93V10.1z"/></svg>
-              RSS Feed
-            </a>
-            <span class="sub-btn sub-spotify">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 01-.277-1.215c3.809-.87 7.077-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 01-.973-.519.781.781 0 01.52-.973c3.632-1.102 8.147-.568 11.234 1.329a.78.78 0 01.256 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 11-.543-1.793c3.563-1.08 9.484-.871 13.22 1.37a.937.937 0 01-.06 1.58z"/></svg>
-              Spotify <span class="sub-soon">(coming soon)</span>
-            </span>
+        <!-- Hero -->
+        <section class="hero">
+          <img class="hero-art" src="podcast_cover.png" alt="Today's Brief" />
+          <div class="hero-body">
+            <div class="hero-label">Daily Podcast</div>
+            <h1 class="hero-title">Today's Brief</h1>
+            <p class="hero-desc">Daily business and tech news. We break down the biggest stories in 5 minutes so you can start your day informed.</p>
+            <div class="hero-subscribe">
+              <a class="sub-btn sub-apple" href="https://hattemdylan-debug.github.io/todays-brief/feed.xml" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a3 3 0 110 6 3 3 0 010-6zm0 14.5c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                Apple Podcasts
+              </a>
+              <a class="sub-btn sub-rss" href="feed.xml" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.18 15.64a2.18 2.18 0 010 4.36 2.18 2.18 0 010-4.36M4 4.44A15.56 15.56 0 0119.56 20h-2.83A12.73 12.73 0 006.18 7.27V4.44m0 5.66a9.9 9.9 0 019.9 9.9h-2.83A7.07 7.07 0 006.18 12.93V10.1z"/></svg>
+                RSS Feed
+              </a>
+              <span class="sub-btn sub-spotify">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 01-.277-1.215c3.809-.87 7.077-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 01-.973-.519.781.781 0 01.52-.973c3.632-1.102 8.147-.568 11.234 1.329a.78.78 0 01.256 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 11-.543-1.793c3.563-1.08 9.484-.871 13.22 1.37a.937.937 0 01-.06 1.58z"/></svg>
+                Spotify <span class="sub-soon">(coming soon)</span>
+              </span>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Right: sponsors sidebar -->
+        <!-- Episodes -->
+        <div class="section-header">
+          <span class="section-title">All Episodes</span>
+        </div>
+        <div class="search-wrap">
+          <input type="search" id="search" placeholder="Search episodes…" autocomplete="off" spellcheck="false" />
+        </div>
+        <div id="episodes">
+          <div class="state-msg">Loading episodes…</div>
+        </div>
+
+        <footer>
+          <p>Today's Brief &mdash; generated daily</p>
+          <a href="feed.xml" target="_blank" rel="noopener">RSS Feed</a>
+        </footer>
+
+      </div><!-- end .main-content -->
+
+      <!-- ── Sponsors sidebar ── -->
       <aside class="sponsors-sidebar">
         <div class="sponsors-label">Thanks To</div>
-      <div class="sponsors-grid">
+        <div class="sponsor-boxes">
 
-        <!-- Anthropic -->
-        <div class="sponsor-box s-anthropic">
-          <svg width="32" height="28" viewBox="0 0 32 28" fill="none">
-            <path d="M18.64 2h-5.28L2 26h5.94l2.3-5.84h11.52L24.06 26H30L18.64 2zM12.1 15.3l3.9-9.88 3.9 9.88H12.1z" fill="white" opacity="0.85"/>
-          </svg>
-          <span class="sponsor-name">Anthropic</span>
+          <!-- Anthropic -->
+          <div class="sponsor-box s-anthropic">
+            <div class="sponsor-icon">
+              <svg width="40" height="35" viewBox="0 0 32 28" fill="none">
+                <path d="M18.64 2h-5.28L2 26h5.94l2.3-5.84h11.52L24.06 26H30L18.64 2zM12.1 15.3l3.9-9.88 3.9 9.88H12.1z" fill="white" opacity="0.9"/>
+              </svg>
+            </div>
+            <span class="sponsor-name">Anthropic</span>
+          </div>
+
+          <!-- ElevenLabs -->
+          <div class="sponsor-box s-eleven">
+            <div class="sponsor-icon">
+              <svg width="48" height="28" viewBox="0 0 48 28" fill="none">
+                <rect x="0"  y="6"  width="7" height="16" rx="3.5" fill="white" opacity="0.9"/>
+                <rect x="11" y="0"  width="7" height="28" rx="3.5" fill="white" opacity="0.9"/>
+                <rect x="22" y="8"  width="7" height="12" rx="3.5" fill="white" opacity="0.9"/>
+                <rect x="33" y="2"  width="7" height="24" rx="3.5" fill="white" opacity="0.9"/>
+              </svg>
+            </div>
+            <span class="sponsor-name">ElevenLabs</span>
+          </div>
+
+          <!-- AWS -->
+          <div class="sponsor-box s-aws">
+            <div class="sponsor-icon">
+              <svg width="56" height="22" viewBox="0 0 90 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <text x="2" y="24" font-family="Inter,Arial,sans-serif" font-weight="900" font-size="28" fill="white" opacity="0.9" letter-spacing="-1">aws</text>
+              </svg>
+            </div>
+            <span class="sponsor-name">Amazon Web Services</span>
+          </div>
+
+          <!-- Apple Podcasts -->
+          <div class="sponsor-box s-apple">
+            <div class="sponsor-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="white" opacity="0.9">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a3 3 0 110 6 3 3 0 010-6zm0 14.5c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"/>
+              </svg>
+            </div>
+            <span class="sponsor-name">Apple Podcasts</span>
+          </div>
+
         </div>
-
-        <!-- AWS -->
-        <div class="sponsor-box s-aws">
-          <svg width="48" height="28" viewBox="0 0 80 28" fill="none">
-            <text x="0" y="22" font-family="Inter,Arial,sans-serif" font-weight="800" font-size="26" fill="white" opacity="0.85" letter-spacing="-1">aws</text>
-          </svg>
-          <span class="sponsor-name">Amazon Web Services</span>
-        </div>
-
-        <!-- ElevenLabs -->
-        <div class="sponsor-box s-eleven">
-          <svg width="44" height="24" viewBox="0 0 44 24" fill="none">
-            <rect x="0"  y="4" width="6" height="16" rx="3" fill="white" opacity="0.85"/>
-            <rect x="10" y="0" width="6" height="24" rx="3" fill="white" opacity="0.85"/>
-            <rect x="20" y="6" width="6" height="12" rx="3" fill="white" opacity="0.85"/>
-            <rect x="30" y="2" width="6" height="20" rx="3" fill="white" opacity="0.85"/>
-          </svg>
-          <span class="sponsor-name">ElevenLabs</span>
-        </div>
-
-        <!-- Apple Podcasts -->
-        <div class="sponsor-box s-apple">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="white" opacity="0.85">
-            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a3 3 0 110 6 3 3 0 010-6zm0 14.5c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"/>
-          </svg>
-          <span class="sponsor-name">Apple Podcasts</span>
-        </div>
-
-      </div>
       </aside>
 
-    </div><!-- end .hero-wrapper -->
-
-  </div><!-- end .page -->
-
-  <!-- Ticker (full bleed) -->
-  <div class="ticker-section" aria-label="Built with">
-    <div class="ticker-label">Built with</div>
-    <div class="ticker-fade-right"></div>
-    <div class="ticker-track">
-      <!-- Set 1 -->
-      <div class="ticker-set">
-        <div class="ticker-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-          GitHub
-        </div>
-        <div class="ticker-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>
-          Vercel
-        </div>
-        <div class="ticker-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/></svg>
-          Stripe
-        </div>
-        <div class="ticker-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.289 9.246a10.572 10.572 0 00-.238-2.367c-.459-2.099-1.701-3.599-3.664-4.508-1.154-.535-2.373-.733-3.636-.77-.234-.006-.468-.013-.701-.014C13.807 1.583 13.364 1.58 12 1.58c-1.362 0-1.806.003-2.048.007-.234.001-.468.008-.701.014-1.264.037-2.483.235-3.636.77-1.964.91-3.205 2.41-3.665 4.508a10.613 10.613 0 00-.238 2.367C1.704 9.498 1.7 9.75 1.7 12c0 2.25.004 2.502.012 2.754.04 1.323.238 2.367.238 2.367.46 2.099 1.701 3.598 3.665 4.508 1.153.535 2.372.733 3.636.77.233.006.467.013.701.014.242.004.686.007 2.048.007s1.807-.003 2.05-.007c.233-.001.467-.008.7-.014 1.264-.037 2.482-.235 3.636-.77 1.963-.91 3.205-2.409 3.664-4.508 0 0 .198-1.044.238-2.367.008-.252.012-.504.012-2.754 0-2.25-.004-2.502-.012-2.754zm-2.158 6.66a4.782 4.782 0 01-.317 1.622c-.367.927-1.045 1.553-1.986 1.896a6.66 6.66 0 01-1.936.378c-.43.02-.575.026-1.892.026s-1.462-.006-1.892-.026a6.671 6.671 0 01-1.937-.378c-.94-.343-1.619-.969-1.985-1.896a4.793 4.793 0 01-.317-1.622C6.845 15.46 6.84 15.316 6.84 12s.005-3.46.023-3.906a4.793 4.793 0 01.317-1.622c.366-.927 1.044-1.553 1.985-1.896a6.667 6.667 0 011.937-.378c.43-.02.575-.026 1.892-.026s1.462.006 1.892.026a6.656 6.656 0 011.936.378c.941.343 1.619.969 1.986 1.896a4.782 4.782 0 01.317 1.622c.018.446.023.59.023 3.906s-.005 3.46-.023 3.906zM12 7.892a4.108 4.108 0 100 8.216 4.108 4.108 0 000-8.216zm0 6.775a2.667 2.667 0 110-5.334 2.667 2.667 0 010 5.334zm5.23-6.938a.96.96 0 11-1.92 0 .96.96 0 011.92 0z"/></svg>
-          Instagram
-        </div>
-        <div class="ticker-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z"/></svg>
-          Pinterest
-        </div>
-        <div class="ticker-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
-          Twitter / X
-        </div>
-        <div class="ticker-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
-        </div>
-        <div class="ticker-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/></svg>
-          Gmail
-        </div>
-        <div class="ticker-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-          OpenAI
-        </div>
-        <div class="ticker-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.9 10.9C14.7 9 9.35 8.8 6.3 9.75c-.5.15-1-.15-1.15-.6-.15-.5.15-1 .6-1.15 3.55-1.05 9.4-.85 13.1 1.35.45.25.6.85.35 1.3-.25.35-.85.5-1.3.25m-.1 2.8c-.25.35-.7.5-1.05.25-2.7-1.65-6.8-2.15-9.95-1.15-.4.1-.85-.1-.95-.5-.1-.4.1-.85.5-.95 3.65-1.1 8.15-.55 11.25 1.35.3.15.45.65.2 1m-1.2 2.75c-.2.3-.55.4-.85.2-2.35-1.45-5.3-1.75-8.8-.95-.3.1-.65-.1-.75-.45-.1-.3.1-.65.45-.75 3.8-.85 7.1-.5 9.7 1.1.35.15.4.55.25.85M12 2A10 10 0 002 12 10 10 0 0012 22 10 10 0 0022 12 10 10 0 0012 2z"/></svg>
-          Spotify
-        </div>
-        <div class="ticker-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.527.099C6.955-.744.942 3.9.099 10.473c-.843 6.572 3.8 12.584 10.373 13.428 6.573.843 12.587-3.801 13.428-10.374C24.744 6.955 20.101.943 13.527.099zm2.471 7.485a.855.855 0 01.119 1.685l-5.443.761 1.726 9.485a.856.856 0 01-1.68.308l-1.81-9.956a.856.856 0 01.698-1.003l6.39-.28z"/></svg>
-          MongoDB
-        </div>
-        <div class="ticker-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z"/></svg>
-          Google
-        </div>
-        <div class="ticker-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.55V6.78a4.85 4.85 0 01-1.07-.09z"/></svg>
-          TikTok
-        </div>
-      </div>
-      <!-- Set 2 (duplicate for seamless loop) -->
-      <div class="ticker-set" aria-hidden="true">
-        <div class="ticker-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>GitHub</div>
-        <div class="ticker-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>Vercel</div>
-        <div class="ticker-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/></svg>Stripe</div>
-        <div class="ticker-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>Twitter / X</div>
-        <div class="ticker-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</div>
-        <div class="ticker-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/></svg>Gmail</div>
-        <div class="ticker-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z"/></svg>Google</div>
-        <div class="ticker-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 002 12 10 10 0 0012 22 10 10 0 0022 12 10 10 0 0012 2zm4.1 14.3c-.2.3-.55.4-.85.2-2.35-1.45-5.3-1.75-8.8-.95-.3.1-.65-.1-.75-.45-.1-.3.1-.65.45-.75 3.8-.85 7.1-.5 9.7 1.1.35.15.4.55.25.85zm1.1-2.8c-.25.35-.7.5-1.05.25-2.7-1.65-6.8-2.15-9.95-1.15-.4.1-.85-.1-.95-.5-.1-.4.1-.85.5-.95 3.65-1.1 8.15-.55 11.25 1.35.3.15.45.65.2 1zm.1-2.75c-3.2-1.9-8.55-2.1-11.6-1.15-.5.15-1-.15-1.15-.6-.15-.5.15-1 .6-1.15 3.55-1.05 9.4-.85 13.1 1.35.45.25.6.85.35 1.3-.25.35-.85.5-1.3.25z"/></svg>Spotify</div>
-        <div class="ticker-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.55V6.78a4.85 4.85 0 01-1.07-.09z"/></svg>TikTok</div>
-        <div class="ticker-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>OpenAI</div>
-        <div class="ticker-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>AWS</div>
-        <div class="ticker-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.47 21.49C2.01 18.17 0 13.75 0 12 0 5.37 5.37 0 12 0s12 5.37 12 12c0 1.75-2.01 6.17-7.47 9.49l-1.02-.87c5.1-2.96 6.37-6.62 6.37-8.62 0-5.52-4.48-10-10-10S2 6.48 2 12c0 2 1.27 5.66 6.37 8.62l-.9.87z"/></svg>ElevenLabs</div>
-        <div class="ticker-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a3 3 0 110 6 3 3 0 010-6zm0 14.5c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"/></svg>Apple</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="page" style="padding-top: 0;">
-
-    <!-- Episodes -->
-    <div class="section-header">
-      <span class="section-title">All Episodes</span>
-    </div>
-
-    <div class="search-wrap">
-      <input type="search" id="search" placeholder="Search episodes…" autocomplete="off" spellcheck="false" />
-    </div>
-
-    <div id="episodes">
-      <div class="state-msg">Loading episodes…</div>
-    </div>
-
-    <footer>
-      <p>Today's Brief &mdash; generated daily</p>
-      <a href="feed.xml" target="_blank" rel="noopener">RSS Feed</a>
-    </footer>
-
-  </div><!-- end .page (episodes) -->
+    </div><!-- end .page-layout -->
+  </div><!-- end .page-outer -->
 
   <script>
     const container   = document.getElementById('episodes');
@@ -845,7 +547,7 @@
       return wrap;
     }
 
-    function renderEpisode(ep, index) {
+    function renderEpisode(ep) {
       const el = document.createElement('article');
       el.className = 'episode';
       el.dataset.search = (ep.title + ' ' + ep.description + ' ' + ep.date).toLowerCase();
@@ -895,7 +597,7 @@
       }
       container.innerHTML = '';
       if (!allEpisodes.length) { container.innerHTML = '<div class="state-msg">No episodes yet.</div>'; return; }
-      allEpisodes.forEach((ep, i) => container.appendChild(renderEpisode(ep, i)));
+      allEpisodes.forEach(ep => container.appendChild(renderEpisode(ep)));
     }
 
     searchInput.addEventListener('input', () => applyFilter(searchInput.value));
