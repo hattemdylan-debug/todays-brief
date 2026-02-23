@@ -303,6 +303,68 @@
     .s-aws       { background: #180e04; }
     .s-apple     { background: #110636; }
 
+    /* ── Subscribe modal ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.18s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .modal {
+      background: #0f1825;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 32px 28px 28px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+      transform: translateY(8px) scale(0.97);
+      transition: transform 0.18s;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(255,255,255,0.07); border: none; border-radius: 50%;
+      width: 30px; height: 30px; cursor: pointer; color: var(--text-muted);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.12); }
+    .modal { position: relative; }
+    .modal-title {
+      font-size: 1.15rem; font-weight: 800; letter-spacing: -0.025em;
+      margin-bottom: 6px;
+    }
+    .modal-sub {
+      font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .modal-actions { display: flex; flex-direction: column; gap: 10px; }
+    .modal-btn {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px; border-radius: 11px;
+      font-size: 0.88rem; font-weight: 600; font-family: inherit;
+      text-decoration: none; cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: opacity 0.15s, border-color 0.15s, background 0.15s;
+      width: 100%;
+    }
+    .modal-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .modal-btn:hover { opacity: 0.88; border-color: rgba(255,255,255,0.15); }
+    .modal-btn-apple { background: linear-gradient(135deg, #6c3ec2, #a855f7); color: #fff; }
+    .modal-btn-rss   { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+    .modal-btn-rss:hover { color: var(--text); }
+    .modal-btn-copy  { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+    .modal-btn-copy:hover { color: var(--text); }
+    .modal-btn-label { flex: 1; text-align: left; }
+    .modal-btn-sublabel { font-size: 0.72rem; font-weight: 400; opacity: 0.65; display: block; margin-top: 1px; }
+    .copy-confirm { font-size: 0.75rem; color: #4ade80; margin-top: 8px; text-align: center; min-height: 18px; transition: opacity 0.2s; }
+
     /* ── States ── */
     .state-msg { text-align: center; padding: 80px 24px; color: var(--text-dim); font-size: 0.9rem; line-height: 1.7; }
 
@@ -344,8 +406,8 @@
         Today's Brief
       </a>
       <div class="nav-links">
-        <a class="nav-link" href="feed.xml" target="_blank" rel="noopener">RSS</a>
-        <a class="nav-link primary" href="https://hattemdylan-debug.github.io/todays-brief/feed.xml" target="_blank" rel="noopener">Subscribe</a>
+        <button class="nav-link" onclick="openSubModal()" style="background:none;cursor:pointer;">RSS</button>
+        <button class="nav-link primary" onclick="openSubModal()" style="cursor:pointer;">Subscribe</button>
       </div>
     </div>
   </nav>
@@ -364,14 +426,14 @@
             <h1 class="hero-title">Today's Brief</h1>
             <p class="hero-desc">Daily business and tech news. We break down the biggest stories in 5 minutes so you can start your day informed.</p>
             <div class="hero-subscribe">
-              <a class="sub-btn sub-apple" href="https://hattemdylan-debug.github.io/todays-brief/feed.xml" target="_blank" rel="noopener">
+              <button class="sub-btn sub-apple" onclick="openSubModal()">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a3 3 0 110 6 3 3 0 010-6zm0 14.5c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
                 Apple Podcasts
-              </a>
-              <a class="sub-btn sub-rss" href="feed.xml" target="_blank" rel="noopener">
+              </button>
+              <button class="sub-btn sub-rss" onclick="openSubModal()">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.18 15.64a2.18 2.18 0 010 4.36 2.18 2.18 0 010-4.36M4 4.44A15.56 15.56 0 0119.56 20h-2.83A12.73 12.73 0 006.18 7.27V4.44m0 5.66a9.9 9.9 0 019.9 9.9h-2.83A7.07 7.07 0 006.18 12.93V10.1z"/></svg>
                 RSS Feed
-              </a>
+              </button>
               <span class="sub-btn sub-spotify">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 01-.277-1.215c3.809-.87 7.077-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 01-.973-.519.781.781 0 01.52-.973c3.632-1.102 8.147-.568 11.234 1.329a.78.78 0 01.256 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 11-.543-1.793c3.563-1.08 9.484-.871 13.22 1.37a.937.937 0 01-.06 1.58z"/></svg>
                 Spotify <span class="sub-soon">(coming soon)</span>
@@ -393,7 +455,7 @@
 
         <footer>
           <p>Today's Brief &mdash; generated daily</p>
-          <a href="feed.xml" target="_blank" rel="noopener">RSS Feed</a>
+          <button onclick="openSubModal()" style="background:none;border:none;cursor:pointer;font-size:0.75rem;color:var(--text-dim);font-family:inherit;" onmouseover="this.style.color='var(--text-muted)'" onmouseout="this.style.color='var(--text-dim)'">RSS Feed</button>
         </footer>
 
       </div><!-- end .main-content -->
@@ -451,6 +513,68 @@
 
     </div><!-- end .page-layout -->
   </div><!-- end .page-outer -->
+
+  <!-- Subscribe modal -->
+  <div class="modal-overlay" id="subModal" role="dialog" aria-modal="true" aria-label="Subscribe">
+    <div class="modal">
+      <button class="modal-close" onclick="closeSubModal()" aria-label="Close">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal-title">Subscribe to Today's Brief</div>
+      <p class="modal-sub">Get daily business &amp; tech news in 5 minutes, every morning.</p>
+      <div class="modal-actions">
+        <a class="modal-btn modal-btn-apple" href="podcast://hattemdylan-debug.github.io/todays-brief/feed.xml">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a3 3 0 110 6 3 3 0 010-6zm0 14.5c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+          <span class="modal-btn-label">
+            Add to Apple Podcasts
+            <span class="modal-btn-sublabel">Opens Apple Podcasts app</span>
+          </span>
+        </a>
+        <button class="modal-btn modal-btn-copy" onclick="copyRSS()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          <span class="modal-btn-label">
+            Copy RSS URL
+            <span class="modal-btn-sublabel">Paste into any podcast app</span>
+          </span>
+        </button>
+        <a class="modal-btn modal-btn-rss" href="https://hattemdylan-debug.github.io/todays-brief/feed.xml" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.18 15.64a2.18 2.18 0 010 4.36 2.18 2.18 0 010-4.36M4 4.44A15.56 15.56 0 0119.56 20h-2.83A12.73 12.73 0 006.18 7.27V4.44m0 5.66a9.9 9.9 0 019.9 9.9h-2.83A7.07 7.07 0 006.18 12.93V10.1z"/></svg>
+          <span class="modal-btn-label">
+            View RSS Feed
+            <span class="modal-btn-sublabel">Raw XML for advanced users</span>
+          </span>
+        </a>
+      </div>
+      <div class="copy-confirm" id="copyConfirm"></div>
+    </div>
+  </div>
+
+  <script>
+    const FEED_URL = 'https://hattemdylan-debug.github.io/todays-brief/feed.xml';
+
+    function openSubModal() {
+      document.getElementById('subModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSubModal() {
+      document.getElementById('subModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('subModal').addEventListener('click', function(e) {
+      if (e.target === this) closeSubModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeSubModal();
+    });
+
+    function copyRSS() {
+      navigator.clipboard.writeText(FEED_URL).then(() => {
+        const el = document.getElementById('copyConfirm');
+        el.textContent = 'Copied to clipboard!';
+        setTimeout(() => { el.textContent = ''; }, 2500);
+      });
+    }
+  </script>
 
   <script>
     const container   = document.getElementById('episodes');
