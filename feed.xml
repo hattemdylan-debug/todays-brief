@@ -8,7 +8,7 @@
     <description>Business &amp; tech news. Tight and punchy. Every morning.</description>
     <language>en-us</language>
     <copyright>Curated</copyright>
-    <lastBuildDate>Sun, 22 Feb 2026 06:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Feb 2026 06:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hattemdylan-debug.github.io/todays-brief/podcast_cover.png</url>
       <title>Today's Brief</title>
@@ -22,6 +22,15 @@
     <itunes:category text="Business"/>
     <itunes:category text="News"/>
     <itunes:explicit>false</itunes:explicit>
+    <item>
+      <title>Today's Brief - February 23, 2026</title>
+      <description>Wall Street embraces the &quot;HALO&quot; trade as investors flock to AI-resistant stocks like McDonald's and John Deere, while all eyes turn to Nvidia's make-or-break earnings Wednesday that could reshape the $65.7 billion revenue chipmaker's future. Plus, global markets tumble as the US imposes sweeping 15% tariffs following a Supreme Court ruling, sending gold soaring amid renewed trade war fears.</description>
+      <pubDate>Mon, 23 Feb 2026 06:00:00 +0000</pubDate>
+      <enclosure url="https://todaysbrief-podcast.s3.us-east-1.amazonaws.com/podcast-2026-02-23.mp3" type="audio/mpeg" length="0"/>
+      <guid isPermaLink="false">https://todaysbrief-podcast.s3.us-east-1.amazonaws.com/podcast-2026-02-23.mp3</guid>
+      <itunes:summary>Wall Street embraces the &quot;HALO&quot; trade as investors flock to AI-resistant stocks like McDonald's and John Deere, while all eyes turn to Nvidia's make-or-break earnings Wednesday that could reshape the $65.7 billion revenue chipmaker's future. Plus, global markets tumble as the US imposes sweeping 15% tariffs following a Supreme Court ruling, sending gold soaring amid renewed trade war fears.</itunes:summary>
+      <itunes:duration>00:05:00</itunes:duration>
+    </item>
     <item>
       <title>Today's Brief - February 22, 2026</title>
       <description>OpenAI slashes its ambitious spending target from $1.4 trillion to $600 billion by 2030 while cybersecurity stocks crash 8-9% in a &quot;mini-flash crash&quot; after Anthropic unveils AI that can automatically patch code vulnerabilities. Plus, the Supreme Court strikes down global tariffs as AI continues reshaping entire industries from gaming to autonomous vehicles.</description>
