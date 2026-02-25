@@ -8,7 +8,7 @@
     <description>Business &amp; tech news. Tight and punchy. Every morning.</description>
     <language>en-us</language>
     <copyright>Curated</copyright>
-    <lastBuildDate>Tue, 24 Feb 2026 06:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Feb 2026 06:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hattemdylan-debug.github.io/todays-brief/podcast_cover.png</url>
       <title>Today's Brief</title>
@@ -24,6 +24,15 @@
     <itunes:category text="News"/>
     <itunes:type>episodic</itunes:type>
     <itunes:explicit>false</itunes:explicit>
+    <item>
+      <title>Today's Brief - February 25, 2026</title>
+      <description>The Pentagon gives Anthropic until Friday to provide unrestricted military AI access or face severe penalties, while Novo Nordisk slashes Ozempic and Wegovy prices by up to 50% starting in 2027. Plus Nvidia's make-or-break earnings after the bell could determine whether AI stocks continue their recent rebound or face another selloff.</description>
+      <pubDate>Wed, 25 Feb 2026 06:00:00 +0000</pubDate>
+      <enclosure url="https://todaysbrief-podcast.s3.us-east-1.amazonaws.com/podcast-2026-02-25.mp3" type="audio/mpeg" length="10482504"/>
+      <guid isPermaLink="false">https://todaysbrief-podcast.s3.us-east-1.amazonaws.com/podcast-2026-02-25.mp3</guid>
+      <itunes:summary>The Pentagon gives Anthropic until Friday to provide unrestricted military AI access or face severe penalties, while Novo Nordisk slashes Ozempic and Wegovy prices by up to 50% starting in 2027. Plus Nvidia's make-or-break earnings after the bell could determine whether AI stocks continue their recent rebound or face another selloff.</itunes:summary>
+      <itunes:duration>00:05:00</itunes:duration>
+    </item>
     <item>
       <title>Today's Brief - February 24, 2026</title>
       <description>A viral AI thought experiment triggers massive tech selloffs as investors panic over a dystopian 2028 scenario where AI agents collapse the financial system, while Meta strikes a $100+ billion deal with AMD to fuel its AI expansion. From software stocks plummeting on automation fears to mortgage rates finally dropping below 6% for the first time since 2022, today's episode unpacks the market chaos reshaping everything from Wall Street to Main Street.</description>
