@@ -8,7 +8,7 @@
     <description>Business &amp; tech news. Tight and punchy. Every morning.</description>
     <language>en-us</language>
     <copyright>Curated</copyright>
-    <lastBuildDate>Wed, 25 Feb 2026 06:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Feb 2026 06:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hattemdylan-debug.github.io/todays-brief/podcast_cover.png</url>
       <title>Today's Brief</title>
@@ -24,6 +24,15 @@
     <itunes:category text="News"/>
     <itunes:type>episodic</itunes:type>
     <itunes:explicit>false</itunes:explicit>
+    <item>
+      <title>Today's Brief - February 26, 2026</title>
+      <description>Nvidia crushes earnings with 73% revenue growth to $68 billion while forecasting even stronger Q1 results, as the Pentagon moves to potentially blacklist Anthropic's Claude AI from defense contractors. Plus major tech giants sign onto the White House's plan to build their own power plants for AI data centers, and AI agents get more powerful with new automation tools from Google, Perplexity, and Samsung.</description>
+      <pubDate>Thu, 26 Feb 2026 06:00:00 +0000</pubDate>
+      <enclosure url="https://todaysbrief-podcast.s3.us-east-1.amazonaws.com/podcast-2026-02-26.mp3" type="audio/mpeg" length="11066184"/>
+      <guid isPermaLink="false">https://todaysbrief-podcast.s3.us-east-1.amazonaws.com/podcast-2026-02-26.mp3</guid>
+      <itunes:summary>Nvidia crushes earnings with 73% revenue growth to $68 billion while forecasting even stronger Q1 results, as the Pentagon moves to potentially blacklist Anthropic's Claude AI from defense contractors. Plus major tech giants sign onto the White House's plan to build their own power plants for AI data centers, and AI agents get more powerful with new automation tools from Google, Perplexity, and Samsung.</itunes:summary>
+      <itunes:duration>00:05:00</itunes:duration>
+    </item>
     <item>
       <title>Today's Brief - February 25, 2026</title>
       <description>The Pentagon gives Anthropic until Friday to provide unrestricted military AI access or face severe penalties, while Novo Nordisk slashes Ozempic and Wegovy prices by up to 50% starting in 2027. Plus Nvidia's make-or-break earnings after the bell could determine whether AI stocks continue their recent rebound or face another selloff.</description>
